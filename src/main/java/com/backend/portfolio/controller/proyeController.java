@@ -19,12 +19,12 @@ public class proyeController {
     @Autowired 
     private IProyectoService proyeServ;
     
-    @PostMapping ("/new/proyecto")
+    @PostMapping ("proyecto/new")
     public void agregarProyecto(@RequestBody Proyecto pro){
         proyeServ.agregarProyecto(pro);
     }
     
-    @GetMapping ("/ver/proyectos")
+    @GetMapping ("proyecto/ver")
     @ResponseBody
     public List<Proyecto> verProyecto (){
         return proyeServ.listarProyectos();

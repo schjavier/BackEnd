@@ -21,24 +21,24 @@ public class persController {
     private IPersonaService personaServ;
     
     
-    @PostMapping ("/new/persona")
+    @PostMapping ("persona/new")
     public void agregarPersona(@RequestBody Persona per){
         personaServ.crearPersona(per);
         
     }
     
-    @GetMapping ("/ver/personas")
+    @GetMapping ("persona/ver")
     @ResponseBody
     public List<Persona> verPersonas(){
         return personaServ.verPersonas();
     } 
     
-    @DeleteMapping ("/borrar/{id}")
+    @DeleteMapping ("persona/borrar/{id}")
     public void borrarPersona(@PathVariable Long id){
         personaServ.eliminarPersona(id);
     }
     
-    @PutMapping ("personas/editar/{id}")
+    @PutMapping ("persona/editar/{id}")
     public Persona editarPersona (@PathVariable Long id, @RequestBody Persona per){
         
         Persona perso = personaServ.buscarPersona(id);

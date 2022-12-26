@@ -19,12 +19,12 @@ public class expController {
     @Autowired
     private IExperienciaService expServ;
     
-    @PostMapping ("/new/experiencia")
+    @PostMapping ("experiecia/new")
     public void agregarExperiencia(@RequestBody Experiencia exp){
         expServ.crearExperiencia(exp);
     }
     
-    @GetMapping ("/ver/experiencias")
+    @GetMapping ("experiencia/ver")
     @ResponseBody
     public List<Experiencia> verExperiencias (){
         return expServ.listarExperiencia();

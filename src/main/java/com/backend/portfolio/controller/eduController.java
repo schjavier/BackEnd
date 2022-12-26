@@ -21,12 +21,12 @@ public class eduController {
     @Autowired
     private IEducacionService eduServ;
     
-    @PostMapping ("/new/educacion")
+    @PostMapping ("educacion/new")
     public void agregarEducacion(@RequestBody Educacion edu){
     eduServ.crearEducacion(edu);
     }
     
-    @GetMapping ("/ver/educacion")
+    @GetMapping ("educacion/ver")
     @ResponseBody
     public List<Educacion> verEducacion(){
     return eduServ.listarEducacion();
