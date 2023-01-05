@@ -1,5 +1,6 @@
 package com.backend.portfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,16 @@ public class Persona {
     String fotoPerfil;
     String fotoBanner;
     
+    
+    @JsonManagedReference
     @OneToMany (mappedBy = "persona")
     List<Experiencia> experiencia;
     
+    @JsonManagedReference
     @OneToMany (mappedBy = "persona")
     List<Educacion> educacion;
     
+    @JsonManagedReference
     @OneToMany (mappedBy = "persona")
     List<Proyecto> proyecto;
     

@@ -9,6 +9,9 @@ import java.util.List;
 public interface IPersonaService {
     
     public List<Persona> verPersonas();
+//    metodo para traer los datos de una sola persona.
+    public Persona mostrarPersona(Long id);    
+    
     public void crearPersona(Persona Per);
     public void eliminarPersona(Long id);
     public Persona buscarPersona(Long id);

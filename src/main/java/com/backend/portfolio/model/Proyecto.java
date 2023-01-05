@@ -1,5 +1,6 @@
 package com.backend.portfolio.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,8 @@ public class Proyecto {
     String comienzo;
     String fin;
     
+//    annotation que permite serializar los objetos, sin generar StackOverflow error
+    @JsonBackReference
     @ManyToOne
     private Persona persona;
 

@@ -4,33 +4,37 @@ import com.backend.portfolio.model.Proyecto;
 import com.backend.portfolio.services.IProyectoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping ("proyecto")
+@CrossOrigin (origins = "http://localhost:4200")
 public class proyeController {
     
     @Autowired 
     private IProyectoService proyeServ;
     
-    @PostMapping ("proyecto/new")
+    @PostMapping ("/new")
     public void agregarProyecto(@RequestBody Proyecto pro){
         proyeServ.agregarProyecto(pro);
     }
     
-    @GetMapping ("proyecto/ver")
+    @GetMapping ("/ver")
     @ResponseBody
     public List<Proyecto> verProyecto (){
         return proyeServ.listarProyectos();
     }
     
-    @PutMapping ("proyecto/editar/{id}")
+    @PutMapping ("/editar/{id}")
     public Proyecto editarProyecto (@PathVariable Long id, @RequestBody Proyecto pro){
         
         Proyecto proyecto = proyeServ.buscarProyecto(id);
@@ -44,7 +48,7 @@ public class proyeController {
         return proyecto; 
     }
     
-    @DeleteMapping ("proyacto/borrar/{id}")
+    @DeleteMapping ("/borrar/{id}")
     public void borrarProyecto(@PathVariable Long id){
     proyeServ.eliminarProyecto(id);
     }

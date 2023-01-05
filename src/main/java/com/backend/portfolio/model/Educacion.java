@@ -1,6 +1,7 @@
 package com.backend.portfolio.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,20 +27,23 @@ public class Educacion {
     private String titulo;
     private String anioComienzo;
     private String anioFinal;
+    private String descripcion;
 
+    @JsonBackReference
     @ManyToOne
     private Persona persona;
     
     public Educacion() {
     }
 
-    public Educacion(Long id, String institucion, String logo, String titulo, String anioComienzo, String anioFinal) {
+    public Educacion(Long id, String institucion, String logo, String titulo, String anioComienzo, String anioFinal, String descripcion) {
         this.id = id;
         this.institucion = institucion;
         this.logo = logo;
         this.titulo = titulo;
         this.anioComienzo = anioComienzo;
         this.anioFinal = anioFinal;
+        this.descripcion = descripcion;
     }
     
     
