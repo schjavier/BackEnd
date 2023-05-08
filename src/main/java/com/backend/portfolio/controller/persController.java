@@ -3,8 +3,8 @@ package com.backend.portfolio.controller;
 
 import com.backend.portfolio.model.Persona;
 import com.backend.portfolio.services.IPersonaService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class persController {
     @Autowired
     private IPersonaService personaServ;
     
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/new")
     public void agregarPersona(@RequestBody Persona per){
         personaServ.crearPersona(per);
@@ -38,11 +38,13 @@ public class persController {
         return personaServ.mostrarPersona(id);
     } 
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/borrar/{id}")
     public void borrarPersona(@PathVariable Long id){
         personaServ.eliminarPersona(id);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/editar/{id}")
     public Persona editarPersona (@PathVariable Long id, @RequestBody Persona per){
         

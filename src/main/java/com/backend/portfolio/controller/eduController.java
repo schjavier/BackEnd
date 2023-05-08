@@ -5,6 +5,7 @@ import com.backend.portfolio.model.Educacion;
 import com.backend.portfolio.services.IEducacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class eduController {
     @Autowired
     private IEducacionService eduServ;
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/new")
     public void agregarEducacion(@RequestBody Educacion edu){
     eduServ.crearEducacion(edu);
@@ -36,10 +38,19 @@ public class eduController {
     return eduServ.listarEducacion();
     }
     
+//    metodo que trae una sola educacion para poder editar
+    @GetMapping ("/ver/{id}")
+    @ResponseBody
+    public Educacion mostrarEducacion(@PathVariable Long id){
+        return eduServ.mostrarEducacion(id);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/borrar/{id}")
     public void borrarEducacion(@PathVariable Long Id){
     eduServ.eliminarEducacion(Id);}
     
+    @PreAuthorize("hasRole('ADMIN')")    
     @PutMapping ("/editar/{id}")
     public Educacion editarEducacion (@PathVariable Long id, @RequestBody Educacion edu){
         Educacion educacion = eduServ.buscarEducacion(id);
@@ -50,7 +61,7 @@ public class eduController {
         educacion.setAnioComienzo(edu.getAnioComienzo());
         educacion.setAnioFinal(edu.getAnioFinal());
         
-        return educacion;
+        return eduServ.guardarEducacion(edu);
         
         
         

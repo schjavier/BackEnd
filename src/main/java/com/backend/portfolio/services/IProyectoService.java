@@ -9,5 +9,7 @@ public interface IProyectoService {
     public void agregarProyecto(Proyecto pro);
     public void eliminarProyecto(Long id);
     public Proyecto buscarProyecto(Long id);
+    public Proyecto mostrarProyecto(Long id);
+    public Proyecto guardarProyecto (Proyecto pro);
     
 }

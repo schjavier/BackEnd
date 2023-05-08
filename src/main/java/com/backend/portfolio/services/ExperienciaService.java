@@ -31,5 +31,15 @@ public class ExperienciaService implements IExperienciaService {
     public Experiencia buscarExperiencia(Long id) {
         return expoRepo.findById(id).orElse(null);
     }
+
+    @Override
+    public Experiencia mostrarExperiencia(Long id) {
+        return expoRepo.findById(id).orElse(null);    
+    }
+
+    @Override
+    public Experiencia guardarExperiencia(Experiencia exp) {
+        return expoRepo.save(exp);
+    }
     
 }

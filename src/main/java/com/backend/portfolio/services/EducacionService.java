@@ -32,5 +32,16 @@ public class EducacionService implements IEducacionService{
     @Override
     public Educacion buscarEducacion(Long id) {
     return eduRepo.findById(id).orElse(null);}
+
+    @Override
+    public Educacion mostrarEducacion(Long id) {
+        return eduRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public Educacion guardarEducacion(Educacion edu) {
+       return eduRepo.save(edu);
+    }
+    
     
 }

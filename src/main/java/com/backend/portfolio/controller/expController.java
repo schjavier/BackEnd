@@ -4,6 +4,7 @@ import com.backend.portfolio.model.Experiencia;
 import com.backend.portfolio.services.IExperienciaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +24,26 @@ public class expController {
     @Autowired
     private IExperienciaService expServ;
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping ("/new")
     public void agregarExperiencia(@RequestBody Experiencia exp){
         expServ.crearExperiencia(exp);
     }
+    
+    @GetMapping ("/ver/{id}")
+    @ResponseBody
+    public Experiencia mostrarExperiencia(@PathVariable Long id){
+        return expServ.buscarExperiencia(id);
+    } 
+
     
     @GetMapping ("/ver")
     @ResponseBody
     public List<Experiencia> verExperiencias (){
         return expServ.listarExperiencia();
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/editar/{id}")
     public Experiencia editarExperiencia (@PathVariable Long id, @RequestBody Experiencia exp){
         
@@ -45,9 +55,10 @@ public class expController {
         experiencia.setAnioComienzo(exp.getAnioComienzo());
         experiencia.setAnioFinal(exp.getAnioFinal());
         
-        return experiencia; 
+        return expServ.guardarExperiencia(exp); 
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/borrar/{id}")
     public void borrarExperiencia(@PathVariable Long id){
     expServ.eliminarExperiencia(id);
